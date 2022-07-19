@@ -375,6 +375,7 @@ __metadata:
     sass: ^1.53.0
     svelte: ^3.49.0
     svelte-preprocess: ^4.10.7
+    svelte-spa-router: ^3.2.0
     vite: ^3.0.2
   languageName: unknown
   linkType: soft
@@ -1331,6 +1332,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"regexparam@npm:2.0.0":
+  version: 2.0.0
+  resolution: "regexparam@npm:2.0.0"
+  checksum: 8db9559041b5f5304fd224b5c87b33f12bbb97e07292e7f573a57d73690c0f2e3e2a956fefe6169527b5585d7d0828b8aecedcf61ce5fae40530185ebcae3031
+  languageName: node
+  linkType: hard
+
 "resolve@npm:^1.22.1":
   version: 1.22.1
   resolution: "resolve@npm:1.22.1"
@@ -1629,6 +1637,15 @@ __metadata:
     typescript:
       optional: true
   checksum: 51a0820c14bcc411ddf3b1cf4c772e73873626ed0b6c54dfca9e06bd6a6b22c9502436df3f1a4dab9eb3a404bba95002fd70cadea29a84fc36da3071309a8b91
+  languageName: node
+  linkType: hard
+
+"svelte-spa-router@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "svelte-spa-router@npm:3.2.0"
+  dependencies:
+    regexparam: 2.0.0
+  checksum: 7ac39d5477595fd04d8df7c0d8c62e7e0d3fe20fd8b763424a1419da82246b76e1a4e6f38fb1d2add7f272442bd98f2484b5e41e06570a69ac80bec09483720b
   languageName: node
   linkType: hard
 
