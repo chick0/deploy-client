@@ -1,6 +1,9 @@
+import { config } from "dotenv";
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import purgecss from "@fullhuman/postcss-purgecss";
+
+config();
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -23,5 +26,7 @@ export default defineConfig({
         },
     },
 
-    define: {},
+    define: {
+        API_HOST: JSON.stringify(process.env.d_API_HOST),
+    },
 });

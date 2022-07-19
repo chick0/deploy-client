@@ -1,4 +1,8 @@
 <script>
+    import { push } from "svelte-spa-router";
+    import { AUTH } from "../url.js";
+    import { setToken, getToken } from "../token.js";
+
     let email = "";
     let email_element = undefined;
 
@@ -6,6 +10,25 @@
     let password_element = undefined;
 
     let login_button = undefined;
+    $: if (login_button != undefined) {
+        check_login();
+    }
+
+    function check_login() {
+        fetch(AUTH, {
+            headers: {
+                Authorization: getToken(),
+            },
+        })
+            .then((resp) => resp.json())
+            .then((json) => {
+                if (json.result === true) {
+                    push("/projects");
+                } else {
+                    login_button.classList.remove("is-loading");
+                }
+            });
+    }
 </script>
 
 <section class="hero is-primary has-background-black is-fullheight">
@@ -42,7 +65,7 @@
 
                         <div class="field">
                             <button
-                                class="button is-dark is-fullwidth"
+                                class="button is-dark is-fullwidth is-loading"
                                 bind:this="{login_button}"
                                 on:click="{(e) => {
                                     if (email.length == 0) {
@@ -53,6 +76,30 @@
                                         alert('비밀번호를 입력해주세요.');
                                     } else {
                                         login_button.classList.add('is-loading');
+                                        fetch(AUTH, {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                            },
+                                            body: JSON.stringify({
+                                                email,
+                                                password,
+                                            }),
+                                        })
+                                            .then((resp) => resp.json())
+                                            .then((json) => {
+                                                if (json.detail != undefined) {
+                                                    alert(json.detail.msg);
+                                                    login_button.classList.remove('is-loading');
+                                                } else {
+                                                    setToken(json.token);
+                                                    push('/projects');
+                                                }
+                                            })
+                                            .catch(() => {
+                                                alert('네트워크 오류가 발생했습니다.');
+                                                login_button.classList.remove('is-loading');
+                                            });
                                     }
                                 }}">Login</button>
                         </div>

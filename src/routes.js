@@ -1,9 +1,13 @@
 import { wrap } from "svelte-spa-router/wrap";
 
-import Login from "./routes/Login.svelte";
-
 export default {
-    "/": Login,
+    "/": wrap({
+        asyncComponent: () => import("./routes/Login.svelte"),
+    }),
+
+    "/projects": wrap({
+        asyncComponent: () => import("./routes/Projects.svelte"),
+    }),
 
     "*": wrap({
         asyncComponent: () => import("./NotFound.svelte"),
