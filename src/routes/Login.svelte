@@ -23,7 +23,7 @@
             .then((resp) => resp.json())
             .then((json) => {
                 if (json.result === true) {
-                    push("/projects");
+                    push("/dashboard");
                 } else {
                     login_button.classList.remove("is-loading");
                 }
@@ -31,7 +31,7 @@
     }
 </script>
 
-<section class="hero is-primary has-background-black is-fullheight">
+<section class="hero is-primary has-background-light is-fullheight">
     <div class="hero-body">
         <div class="container">
             <div class="columns is-centered">
@@ -93,7 +93,7 @@
                                                     login_button.classList.remove('is-loading');
                                                 } else {
                                                     setToken(json.token);
-                                                    push('/projects');
+                                                    push('/dashboard');
                                                 }
                                             })
                                             .catch(() => {

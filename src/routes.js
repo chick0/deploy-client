@@ -5,6 +5,10 @@ export default {
         asyncComponent: () => import("./routes/Login.svelte"),
     }),
 
+    "/dashboard": wrap({
+        asyncComponent: () => import("./routes/Dashboard.svelte"),
+    }),
+
     "/projects": wrap({
         asyncComponent: () => import("./routes/Projects.svelte"),
     }),
