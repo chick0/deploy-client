@@ -91,6 +91,9 @@
                                                 if (json.detail != undefined) {
                                                     alert(json.detail.msg);
                                                     login_button.classList.remove('is-loading');
+
+                                                    email = "";
+                                                    password = "";
                                                 } else {
                                                     setToken(json.token);
                                                     push('/dashboard');
