@@ -28,33 +28,16 @@
         <div class="box">
             <h5 class="title is-5">프로젝트</h5>
             <div class="buttons">
-                <button
-                    class="button is-info"
-                    on:click="{() => {
-                        push('/projects');
-                    }}">내 프로젝트</button>
-
-                <button
-                    class="button is-primary"
-                    on:click="{() => {
-                        push('/project/create');
-                    }}">프로젝트 생성</button>
+                <a class="button is-primary" href="#/project">내 프로젝트</a>
+                <a class="button is-warning" href="#/project/create">프로젝트 생성</a>
             </div>
         </div>
 
         <div class="box">
             <h5 class="title is-5">배포 토큰</h5>
             <div class="buttons">
-                <button
-                    class="button is-success"
-                    on:click="{() => {
-                        push('/deploy-token/create');
-                    }}">배포 토큰 생성</button>
-                <button
-                    class="button is-warning"
-                    on:click="{() => {
-                        push('/deploy-token');
-                    }}">배포 토큰 삭제</button>
+                <a class="button is-success" href="#/deploy-token/create">배포 토큰 생성</a>
+                <a class="button is-info" href="#/deploy-token">배포 토큰 조회</a>
             </div>
         </div>
 
@@ -62,7 +45,7 @@
             <h5 class="title is-5">계정</h5>
             <div class="buttons">
                 <button
-                    class="button is-light"
+                    class="button is-dark"
                     on:click="{() => {
                         clearToken();
                         push('/');

@@ -1,19 +1,19 @@
-import { wrap } from "svelte-spa-router/wrap";
+import Login from "./routes/Login.svelte";
+import Dashboard from "./routes/Dashboard.svelte";
+
+import ProjectList from "./routes/ProjectList.svelte";
+import ProjectCreate from "./routes/ProjectCreate.svelte";
+import Project from "./routes/Project.svelte";
+
+import NotFound from "./NotFound.svelte";
 
 export default {
-    "/": wrap({
-        asyncComponent: () => import("./routes/Login.svelte"),
-    }),
+    "/": Login,
+    "/dashboard": Dashboard,
 
-    "/dashboard": wrap({
-        asyncComponent: () => import("./routes/Dashboard.svelte"),
-    }),
+    "/project": ProjectList,
+    "/project/create": ProjectCreate,
+    "/project/:uuid": Project,
 
-    "/projects": wrap({
-        asyncComponent: () => import("./routes/Projects.svelte"),
-    }),
-
-    "*": wrap({
-        asyncComponent: () => import("./NotFound.svelte"),
-    }),
+    "*": NotFound,
 };
