@@ -67,7 +67,7 @@
                             <button
                                 class="button is-dark is-fullwidth is-loading"
                                 bind:this="{login_button}"
-                                on:click="{(e) => {
+                                on:click="{() => {
                                     if (email.length == 0) {
                                         email_element.classList.add('is-danger');
                                         alert('이메일을 입력해주세요.');
@@ -92,8 +92,8 @@
                                                     alert(json.detail.msg);
                                                     login_button.classList.remove('is-loading');
 
-                                                    email = "";
-                                                    password = "";
+                                                    email = '';
+                                                    password = '';
                                                 } else {
                                                     setToken(json.token);
                                                     push('/dashboard');
