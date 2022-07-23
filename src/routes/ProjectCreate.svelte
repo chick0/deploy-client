@@ -1,11 +1,25 @@
 <script>
+    import { push } from "svelte-spa-router";
+    import { PROJECT } from "../url.js";
+    import { getToken } from "../token.js";
     import { TYPE, getTypeId } from "../type.js";
 
     let title = "";
     let selected_type = "";
 
-    let path = null;
-    let command = null;
+    let path = "";
+    let command = "";
+
+    let create_button;
+
+    function getPayload() {
+        return {
+            title,
+            type: getTypeId(selected_type),
+            path,
+            command,
+        };
+    }
 </script>
 
 <section class="section">
@@ -69,7 +83,34 @@
 
         {#if !isNaN(getTypeId(selected_type))}
             <div class="block">
-                <button class="button is-large is-info is-fullwidth">프로젝트 생성</button>
+                <button
+                    class="button is-large is-info is-fullwidth"
+                    bind:this="{create_button}"
+                    on:click="{() => {
+                        create_button.classList.add('is-loading');
+                        fetch(PROJECT, {
+                            method: 'POST',
+                            headers: {
+                                Authorization: getToken(),
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(getPayload()),
+                        })
+                            .then((resp) => resp.json())
+                            .then((json) => {
+                                if (json.detail != undefined) {
+                                    alert(json.detail.msg);
+                                    create_button.classList.remove('is-loading');
+                                } else {
+                                    alert(`"${json.title}" 프로젝트가 생성되었습니다.`);
+                                    push(`/project/${json.uuid}`);
+                                }
+                            })
+                            .catch(() => {
+                                alert('네트워크 오류가 발생했습니다.');
+                                create_button.classList.remove('is-loading');
+                            });
+                    }}">프로젝트 생성</button>
             </div>
         {/if}
     </div>
