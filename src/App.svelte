@@ -8,3 +8,7 @@
 </script>
 
 <Router routes="{routes}" />
+
+{#if window.location.hash != "" && window.location.hash != "#/"}
+    <section class="section"></section>
+{/if}

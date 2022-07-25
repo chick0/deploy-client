@@ -89,5 +89,3 @@
         </div>
     </div>
 </section>
-
-<section class="section"></section>
