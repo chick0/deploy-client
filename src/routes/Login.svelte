@@ -28,7 +28,8 @@
                     clearToken();
                     login_button.classList.remove("is-loading");
                 }
-            }).catch(() => {
+            })
+            .catch(() => {
                 login_button.classList.remove("is-loading");
             });
     }
