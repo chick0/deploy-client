@@ -1,7 +1,7 @@
 <script>
     import { push } from "svelte-spa-router";
     import { AUTH } from "../url.js";
-    import { setToken, getToken } from "../token.js";
+    import { setToken, getToken, clearToken } from "../token.js";
 
     let email = "";
     let email_element = undefined;
@@ -25,8 +25,11 @@
                 if (json.result === true) {
                     push("/dashboard");
                 } else {
+                    clearToken();
                     login_button.classList.remove("is-loading");
                 }
+            }).catch(() => {
+                login_button.classList.remove("is-loading");
             });
     }
 </script>
