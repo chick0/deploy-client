@@ -61,16 +61,6 @@
             <a href="#/dashboard">대시보드로 이동</a>
         </div>
 
-        {#if logIDList.length == 0}
-            <div class="notification is-danger">
-                <b>경고!</b> 해당 프로젝트의 배포 정보가 없습니다.
-            </div>
-
-            <div class="box">
-                <b>배포 도구</b>의 사용 방법은 <a href="https://github.com/chick0/deploy-cli">여기</a>를 참고해주세요.
-            </div>
-        {/if}
-
         <div class="box">
             <h5 class="title is-5">배포 토큰 관리자</h5>
             <div class="buttons">
@@ -86,6 +76,17 @@
         <h2 class="title is-2">배포 기록</h2>
         <p class="subtitle"><b>클릭</b>하면 자세한 정보를 확인 할 수 있습니다.</p>
         <div class="block">
+            {#if logIDList.length == 0}
+                <div class="notification is-danger">
+                    <b>경고!</b> 해당 프로젝트의 배포 정보가 없습니다.
+                </div>
+
+                <div class="box">
+                    <b>배포 도구</b>의 사용 방법은 <a href="https://github.com/chick0/deploy-cli">여기</a>를
+                    참고해주세요.
+                </div>
+            {/if}
+
             {#each logIDList as logID}
                 <div
                     class="box"
