@@ -62,12 +62,18 @@
 
 <section class="section">
     <div class="container">
-        <h2 class="title is-2">내 프로젝트</h2>        
+        <h2 class="title is-2">내 프로젝트</h2>
         <div class="block">
             <a class="button is-link" href="#/project/create">프로젝트 생성</a>
         </div>
 
         <div class="block">
+            {#if projectList.length == 0}
+                <div class="notification is-warning">
+                    <b>경고!</b> 등록된 프로젝트가 없습니다.
+                </div>
+            {/if}
+
             {#each projectList as project}
                 <div
                     class="box is-clickable"
