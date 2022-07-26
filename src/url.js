@@ -6,6 +6,8 @@ export const HOST =
 
 export const AUTH          = HOST + "/api/v1/auth";
 
+export const USER          = (uuid) => HOST + `/api/v1/user/${uuid}`;
+
 export const PROJECT       = HOST + "/api/v1/project";
 export const PROJECT_UUID  = (uuid) => PROJECT + `/${uuid}`;
 

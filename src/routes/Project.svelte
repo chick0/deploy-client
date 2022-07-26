@@ -2,6 +2,8 @@
     import { push } from "svelte-spa-router";
     import { PROJECT_UUID, LOG_LIST, LOG_DETAIL } from "../url.js";
     import { getToken } from "../token.js";
+    import { fetchName } from "../name.js";
+
     export let params = {};
 
     const URL = PROJECT_UUID(params.uuid);
@@ -116,7 +118,12 @@
                         {@html getTag(logID.return_code)}
                         {new Date(logID.created_at).toLocaleString()}
                     </h5>
-                    <p class="subtitle">by <b>{logID.create_by}</b></p>
+
+                    {#await fetchName(logID.create_by)}
+                        <p class="subtitle">by <b>...</b></p>
+                    {:then name}
+                        <p class="subtitle">by <b>{name}</b></p>
+                    {/await}
 
                     {#if logID.loading === true}
                         <div class="box">로그를 불러오고 있습니다...</div>
@@ -134,6 +141,17 @@
                         </div>
 
                         {#if logID.detail.child != undefined}
+                            <h5 class="title is-5">
+                                {@html getTag(logID.detail.child.return_code)}
+                                {new Date(logID.detail.child.created_at).toLocaleString()}
+                            </h5>
+
+                            {#await fetchName(logID.detail.child.create_by)}
+                                <p class="subtitle">by <b>...</b></p>
+                            {:then name}
+                                <p class="subtitle">by <b>{name}</b></p>
+                            {/await}
+
                             <div class="box">
                                 <div class="content">
                                     <pre>{logID.detail.child.stdout}</pre>
