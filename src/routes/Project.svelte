@@ -47,11 +47,21 @@
             });
     }
 
-    function getTag(return_code) {
+    function getStatusTag(return_code) {
         if (return_code == 0) {
-            return `<b class="tag is-success">성공</b>`;
+            return `<span class="tag is-success">성공</span>`;
         } else {
-            return `<b class="tag is-danger">실패</b>`;
+            return `<span class="tag is-danger">실패</span>`;
+        }
+    }
+
+    function getTypeTag(type) {
+        if (type == 0) {
+            return "";
+        } else if (type == 1) {
+            return `<span class="tag is-info">Pull</span>`;
+        } else {
+            return `<span class="tag is-link">Command</span>`;
         }
     }
 </script>
@@ -115,7 +125,8 @@
                         }
                     }}">
                     <h5 class="title is-5">
-                        {@html getTag(logID.return_code)}
+                        {@html getStatusTag(logID.return_code)}
+                        {@html getTypeTag(logID.type)}
                         {new Date(logID.created_at).toLocaleString()}
                     </h5>
 
@@ -132,33 +143,39 @@
                     {#if logID.loaded === true}
                         <div class="box">
                             <div class="content">
-                                <pre>{logID.detail.stdout}</pre>
-                            </div>
+                                {#if logID.detail.stdout.length != 0}
+                                    <pre>{logID.detail.stdout}</pre>
+                                {/if}
 
-                            <div class="content">
-                                <pre>{logID.detail.stderr}</pre>
+                                {#if logID.detail.stderr.length != 0}
+                                    <pre>{logID.detail.stderr}</pre>
+                                {/if}
                             </div>
                         </div>
 
                         {#if logID.detail.child != undefined}
-                            <h5 class="title is-5">
-                                {@html getTag(logID.detail.child.return_code)}
-                                {new Date(logID.detail.child.created_at).toLocaleString()}
-                            </h5>
-
-                            {#await fetchName(logID.detail.child.create_by)}
-                                <p class="subtitle">by <b>...</b></p>
-                            {:then name}
-                                <p class="subtitle">by <b>{name}</b></p>
-                            {/await}
-
                             <div class="box">
-                                <div class="content">
-                                    <pre>{logID.detail.child.stdout}</pre>
-                                </div>
+                                <h5 class="title is-5">
+                                    {@html getStatusTag(logID.detail.child.return_code)}
+                                    {@html getTypeTag(logID.detail.child.type)}
+                                    {new Date(logID.detail.child.created_at).toLocaleString()}
+                                </h5>
 
-                                <div class="content">
-                                    <pre>{logID.detail.child.stderr}</pre>
+                                {#await fetchName(logID.detail.child.create_by)}
+                                    <p class="subtitle">by <b>...</b></p>
+                                {:then name}
+                                    <p class="subtitle">by <b>{name}</b></p>
+                                {/await}
+
+                                <div class="box">
+                                    <div class="content">
+                                        {#if logID.detail.child.stdout.length != 0}
+                                            <pre>{logID.detail.child.stdout}</pre>
+                                        {/if}
+                                        {#if logID.detail.child.stderr.length != 0}
+                                            <pre>{logID.detail.child.stderr}</pre>
+                                        {/if}
+                                    </div>
                                 </div>
                             </div>
                         {/if}
