@@ -14,16 +14,16 @@
         "@sveltejs/vite-plugin-svelte": "^1.0.1",
         "bulma": "^0.9.4",
         "dotenv": "^16.0.1",
-        "postcss": "^8.4.14",
+        "postcss": "^8.4.16",
         "prettier": "^2.7.1",
         "prettier-plugin-svelte": "^2.7.0",
-        "sass": "^1.53.0",
+        "sass": "^1.54.4",
         "svelte": "^3.49.0",
         "svelte-preprocess": "^4.10.7",
-        "vite": "^3.0.2"
+        "vite": "^3.0.7"
     },
     "dependencies": {
         "buffer": "^6.0.3",
-        "svelte-spa-router": "^3.2.0"
+        "svelte-spa-router": "^3.3.0"
     }
 }
