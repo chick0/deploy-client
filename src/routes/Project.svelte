@@ -80,6 +80,50 @@
                 <button class="button is-danger">토큰 삭제</button>
             </div>
         </div>
+
+        <div class="box">
+            <h5 class="title is-5">프로젝트 관리자</h5>
+            <div class="buttons">
+                <button
+                    class="button is-danger"
+                    on:click="{(event) => {
+                        const button = event.target;
+
+                        function toggle() {
+                            // @ts-ignore
+                            button.classList.toggle('is-loading');
+                        }
+
+                        toggle();
+
+                        if (confirm('해당 프로젝트를 삭제하시겠습니까?')) {
+                            fetch(URL, {
+                                method: 'DELETE',
+                                headers: {
+                                    Authorization: getToken(),
+                                },
+                            })
+                                .then((resp) => resp.json())
+                                .then((json) => {
+                                    if (json.result) {
+                                        alert('프로젝트가 삭제되었습니다.');
+                                        push('/dashboard');
+                                    } else {
+                                        alert(`프로젝트 삭제가 실패했습니다.\n* ${json.reason}`);
+                                        toggle();
+                                    }
+                                })
+                                .catch(() => {
+                                    alert('네트워크 오류가 발생했습니다.');
+                                    toggle();
+                                });
+                        } else {
+                            alert('취소되었습니다.');
+                            toggle();
+                        }
+                    }}">프로젝트 삭제</button>
+            </div>
+        </div>
     </div>
 </section>
 
